@@ -5,7 +5,7 @@
 //  Created by Kaiyan Li on 8/12/19.
 //  Copyright © 2019 Kaiyan Li. All rights reserved.
 //
-
+#pragma once
 #include <iostream>
 #include <string>
 #include "FBullCowGame.hpp"
@@ -20,7 +20,7 @@ FText GetValidGuess();
 int32 GetHiddenWordLength();
 void PrintGameSummary();
 
-FBullCowGame BCGame;//instantiate a new game
+FBullCowGame BCGame;//instantiate a new game,which we re-use across plays
 
 // the entry point for our application
 int main(int32 argc, const char * argv[])
@@ -39,9 +39,23 @@ int main(int32 argc, const char * argv[])
 
 void PrintIntro()
 {
-    //Introduce the game.
     const FString  HIDDEN_WORD = "planet";
+    
     std::cout << "\n\nWelcome to Bulls and Cows, a fun word game!\n";
+    std::cout << "           }   {         ___ " << std::endl;
+    std::cout << "           (o o)        (o o) " << std::endl;
+    std::cout << "    /-------\\ /          \\ /-------\\ " << std::endl;
+    std::cout << "   / | BULL |O            O| COW  | \\ " << std::endl;
+    std::cout << "  *  |-,--- |              |------|  * " << std::endl;
+    std::cout << "     ^      ^              ^      ^ " << std::endl;
+    
+    std::cout << "                  |\\_/|                " << std::endl;
+    std::cout << "                 / @ @ \\                " << std::endl;
+    std::cout << "                ( > º < )               " << std::endl;
+    std::cout << "                 `>>x<<´              " << std::endl;
+    std::cout << "                 `>>x<<´              " << std::endl;
+    std::cout << "                 /  O  \\              " << std::endl;
+    
     std::cout << "Can you guess the " << BCGame.GetHiddenWordLength() << " letter isogram I'm thinking of?\n";
     std::cout << std::endl;
     return;
@@ -78,25 +92,24 @@ FText GetValidGuess() // loop continuely untill the user gives a valid guess
         int32 CurrentTry = BCGame.GetCurrentTry();
         
         //Get the guess from player
-        std::cout << "Try " << CurrentTry <<".Please enter your Guess:";
+        std::cout << "Try " << CurrentTry << " of " << BCGame.GetMaxTries()<<".Please enter your Guess:";
         std::getline (std::cin, Guess);
         
         Status = BCGame.CheckGuessValidity(Guess);
         switch (Status) {
             case EGuessStatus::Wrong_Length:
-                std::cout << "Please enter a " <<BCGame.GetHiddenWordLength() << " letter word \n";
+                std::cout << "Please enter a " <<BCGame.GetHiddenWordLength() << " letter word \n\n";
                 break;
                 
             case EGuessStatus::Not_Isogram:
-                std::cout << "Please enter a word without repeating letters.. \n";
+                std::cout << "Please enter a word without repeating letters.. \n\n";
                 break;
             case EGuessStatus::Not_Lowercase:
-                std::cout << "Please enter all lowercase letters. \n";
+                std::cout << "Please enter all lowercase letters. \n\n";
                 break;
             default:
                 break;
         }
-            std::cout << std::endl;
     }while (Status != EGuessStatus::OK); // keep looping untill we get no errors
     return Guess;
 }

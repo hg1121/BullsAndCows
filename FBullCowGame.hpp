@@ -5,13 +5,14 @@
 //  Created by Kaiyan Li on 8/13/19.
 //  Copyright © 2019 Kaiyan Li. All rights reserved.
 //
-
+#pragma once
 #ifndef FBullCowGame_hpp
 #define FBullCowGame_hpp
 
 #include <stdio.h> 
 #include <string>
 
+//to make the syntax Unreal friendly
 using FString = std::string;
 using int32 = int;
 
@@ -42,9 +43,7 @@ public:
     
 
     void Reset();
-    #warning Todo make a more rich return value.
     EGuessStatus CheckGuessValidity(FString) const;
-    #warning Todo make a more rich return value.
     FBullCowCount SubmitValidGuess(FString);
 
 //^ ^ please try and ignore this and focus on the interface above. ^ ^
